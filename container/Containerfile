@@ -1,0 +1,49 @@
+FROM docker.io/ubuntu:24.04 as dpfbuild
+
+WORKDIR /usr/local/go/scr/tapir 
+ADD ./ ./
+
+# Install dependencies for building libOTe
+RUN apt-get update && apt-get install -y \
+    git automake libtool python3 cmake build-essential \
+    wget lsb-release software-properties-common gnupg curl \
+    openssl libssl-dev
+
+# Install clang-19
+RUN wget https://apt.llvm.org/llvm.sh 
+RUN chmod u+x llvm.sh
+RUN ./llvm.sh 19
+
+
+# Clone libOTe repository and initialize submodules
+# Submodule path 'cryptoTools': checked out 'a403ec37c6a32148648b7d8fd66dc35318d9f99d'
+RUN git clone https://github.com/osu-crypto/libOTe.git && \
+    cd libOTe && \
+    git checkout a403ec37c6a32148648b7d8fd66dc35318d9f99d && \
+    git submodule update --init --recursive 
+
+# Set environment variables for Clang and build flags
+ENV CXXFLAGS="-std=c++20"
+ENV CC="clang-19"
+ENV CXX="clang++-19"
+
+# Build libOTe with the desired options AND Explicitly set the CMake compilers
+RUN cd libOTe && \
+    python3 build.py \
+    -DENABLE_REGULAR_DPF=ON -DENABLE_PIC=ON -DLIBOTE_SHARED=ON \
+    --install=build
+
+# Build go part
+ENV GO_VERSION 1.23.4
+
+RUN curl -fsSL https://golang.org/dl/go$GO_VERSION.linux-amd64.tar.gz -o /tmp/go$GO_VERSION.linux-amd64.tar.gz && \
+    tar -C /usr/local -xzf /tmp/go$GO_VERSION.linux-amd64.tar.gz && \
+    rm /tmp/go$GO_VERSION.linux-amd64.tar.gz
+
+ENV PATH="/usr/local/go/bin:${PATH}"
+ENV GOPATH=/go
+ENV GOROOT=/usr/local/go
+
+RUN go get -d ./...
+RUN go build -o bench benchmark/full/benchmark.go
+RUN go build -o update benchmark/update/benchmark_update.go

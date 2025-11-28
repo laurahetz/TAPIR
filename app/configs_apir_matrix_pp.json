@@ -1,0 +1,90 @@
+{
+    "Configs": [
+        { 
+            "PirType": 3,
+            "VcType": 1,
+            "Repetitions": 25,
+            "DbSize": 1024,
+            "NumParts": -1,
+            "RecSize": 32
+        },
+
+        { 
+            "PirType": 3,
+            "VcType": 1,
+            "Repetitions": 25,
+            "DbSize": 4096,
+            "NumParts": -1,
+            "RecSize": 32
+        },
+
+        { 
+            "PirType": 3,
+            "VcType": 1,
+            "Repetitions": 25,
+            "DbSize": 16384,
+            "NumParts": -1,
+            "RecSize": 32
+        },
+
+        { 
+            "PirType": 3,
+            "VcType": 1,
+            "Repetitions": 25,
+            "DbSize": 65536,
+            "NumParts": -1,
+            "RecSize": 32
+        },
+
+        { 
+            "PirType": 3,
+            "VcType": 1,
+            "Repetitions": 25,
+            "DbSize": 262144,
+            "NumParts": -1,
+            "RecSize": 32
+        },
+
+        { 
+            "PirType": 3,
+            "VcType": 1,
+            "Repetitions": 25,
+            "DbSize": 1048576,
+            "NumParts": -1,
+            "RecSize": 32
+        },
+
+        { 
+            "PirType": 3,
+            "VcType": 1,
+            "Repetitions": 25,
+            "DbSize": 4194304,
+            "NumParts": -1,
+            "RecSize": 32
+        },
+        { 
+            "PirType": 3,
+            "VcType": 1,
+            "Repetitions": 25,
+            "DbSize": 16777216,
+            "NumParts": -1,
+            "RecSize": 32
+        },
+        { 
+            "PirType": 3,
+            "VcType": 1,
+            "Repetitions": 25,
+            "DbSize": 67108864,
+            "NumParts": -1,
+            "RecSize": 32
+        },
+        { 
+            "PirType": 3,
+            "VcType": 1,
+            "Repetitions": 25,
+            "DbSize": 268435456,
+            "NumParts": -1,
+            "RecSize": 32
+        }
+    ]
+}
