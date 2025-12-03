@@ -1,6 +1,7 @@
 # TwoServerAPIR
 
 This is a prototype implementation of TAPIR, Two-server Authenticated Private Information Retrieval.
+Check out our [paper](https://ia.cr/2025/2177) (to appear at ACNS'25) for details.
 
 > :warning: **Disclaimer**: This code is provided as an experimental implementation for testing purposes and should not be used in a productive environment. We cannot guarantee security and correctness.
 
